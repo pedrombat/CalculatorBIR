@@ -1,14 +1,23 @@
 #ifndef EVALUATE_INCLUDED
 #define EVALUATE_INCLUDED
+#include "binary_tree.hpp"
+#include <iostream>
+#include <string>
+#include <math.h>
+#include <sstream>
+#include <stdlib.h>
+#include <algorithm>
+#include <regex>
 
 using namespace std;
 
-class evaluate
+class Evaluate
 {
 
 public:
-void evaluate(node_type* prt);
-bool IsOp(string mystring);
+    
+    void evaluatetree(Nodetype* prt);
+    bool isop(string mystring);
     
 };
 

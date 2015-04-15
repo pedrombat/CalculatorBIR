@@ -10,6 +10,7 @@
 #include <sstream>
 #include <stdlib.h>
 #include "binary_tree.hpp"
+#include "evaluate.hpp"
 
 
 Nodetype::Nodetype(std::string k)
@@ -26,24 +27,29 @@ Nodetype *build_node(std::string x) //build a new node for the tree
 		new_node = new Nodetype(x);
 		return(new_node);
 }
-
+bool checkInsert;
+Evaluate check;
 struct Nodetype* Binarytree::insert(Nodetype *node, std::string data)
 {
 
 		if(node==NULL) {
-			std::cout<<""<<std::endl;
+			checkInsert = true;
+			//std::cout<<"1"<<std::endl;
 			return (build_node(data));}
 		 else
 		    {
-			 	if(node->right_child==NULL){
-			 		 node->right_child=insert(node->right_child,data);
-			 		 std::cout<<""<<node->right_child->data<<std::endl;
-			 	}
-			 	else{
-			 		 node->left_child=insert(node->left_child,data);
-			 		 std::cout<<""<<node->left_child->data<<std::endl;
-			 	}
+                if(check.isop(node->data)){
+						 node->right_child=insert(node->right_child,data);
+						 //std::cout<<"2"<<node->right_child->data<<std::endl;
+						 if(!checkInsert){
+							 node->left_child=insert(node->left_child,data);
+							// std::cout<<"3"<<node->left_child->data<<std::endl;
+						 }
+
+			 		}
+
 		    }
+		return node;
 
 }
 

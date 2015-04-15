@@ -5,11 +5,17 @@
  *      Author: gustavo
  */
 #include "evaluate.hpp"
-#include <string>
 #include <iostream>
+#include <string>
+#include <math.h>
+#include <sstream>
+#include <stdlib.h>
+#include <algorithm>
+#include <regex>
+#include "binary_tree.hpp"
 using namespace std;
 
-bool IsOp(string mystring)
+bool Evaluate::isop(std::string mystring)
 {
     if(mystring == "-" || mystring == "+" || mystring == "/" || mystring == "*" || mystring == "^")
         return(true);
@@ -17,14 +23,14 @@ bool IsOp(string mystring)
         return(false);
 }
 
-void evaluate::evaluate(node_type* prt)
+void Evaluate::evaluatetree(Nodetype* prt)
 {
 
-    if(IsOp(prt->data) && !IsOp(prt->right_child->data) && !IsOp(prt->left_child->data))
+    if(isop(prt->data) && !isop(prt->right_child->data) && !isop(prt->left_child->data))
     {
         double num;
-        double num2 = atof(prt->right_child.c_str()->data.c_str());
-        double num1 = atof(prt->left_child.c_str()->data.c_str());
+        double num2 = atof(prt->right_child->data.c_str());
+        double num1 = atof(prt->left_child->data.c_str());
         if(prt->data == "+")
         {
             num = num1 + num2;
@@ -56,8 +62,9 @@ void evaluate::evaluate(node_type* prt)
     else if(prt->left_child == NULL && prt->right_child == NULL);
     else
     {
-        evaluate(prt->left_child);
-        evaluate(prt->right_child);
-        evaluate(prt);
+        evaluatetree(prt->left_child);
+        evaluatetree(prt->right_child);
+        evaluatetree(prt);
     }
+}
 

@@ -11,5 +11,5 @@ set(test_path ${PROJECT_SOURCE_DIR}/test)
 ## DEFINE BINARY DESTINE
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${bin_path})
 
-add_executable(binary_tree src/main.cpp)
+add_executable(binary_tree src/binary_tree_main.cpp)
 target_link_libraries(binary_tree ${SOURCE_LIBS})
