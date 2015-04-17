@@ -1,6 +1,7 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
+#include <QApplication>
 #include <QMainWindow>
 
 
@@ -21,7 +22,7 @@ public:
     explicit CalculatorInterface(QWidget *parent = 0);
     ~CalculatorInterface();
 
-void EraseLCDAfterError();
+    void EraseLCDAfterError();
 
 private slots:
 

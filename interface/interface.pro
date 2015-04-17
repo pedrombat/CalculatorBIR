@@ -14,11 +14,17 @@ TEMPLATE = app
 
 SOURCES += \
     interface.cpp \
-    Sintax.cpp \
-    main.cpp
+    main.cpp \
+    binary_tree.cpp \
+    evaluate.cpp \
+    sintax.cpp \
+    isop.cpp
 
 HEADERS  += \
     interface.h \
-    Sintax.h
+    binary_tree.h \
+    evaluate.h \
+    sintax.h \
+    isop.h
 
 FORMS    += calculatorbir.ui

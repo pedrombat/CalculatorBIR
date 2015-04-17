@@ -1,19 +1,24 @@
 #include "interface.h"
 #include "ui_calculatorbir.h"
-#include <iostream>
-#include <stdio.h>
+
 #include <string>
-#include <QApplication>
+#include <stdio.h>
+#include <iostream>
+#include "sintax.h"
+#include "binary_tree.h"
+#include "evaluate.h"
+#include <sstream>
+
+//#include "binary_tree.cpp"
+//#include "evaluate.cpp"
 
 int open_interface(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     CalculatorInterface w;
     w.show();
-
     return a.exec();
 }
-
 
 CalculatorInterface::CalculatorInterface(QWidget *parent) :
     QMainWindow(parent),
@@ -188,13 +193,6 @@ void CalculatorInterface::on_Button_AC_clicked()
 
 void CalculatorInterface::on_Button_Backspace_clicked()
 {
-//    EraseLCDAfterError();
-//    const char* auxchar=ui->LCD->text().toStdString().c_str();
-//    char backspace[50];
-//    strcpy(backspace, auxchar);
-//    backspace[strlen(backspace)-1]='\0';
-//    ui->LCD->setText(backspace);
-
     EraseLCDAfterError();
     const std::string auxstring=ui->LCD->text().toStdString();
     std::string backspace;
@@ -203,30 +201,46 @@ void CalculatorInterface::on_Button_Backspace_clicked()
     ui->LCD->setText(backspace.c_str());
 }
 
-void CalculatorInterface::EraseLCDAfterError()
-{
-    std::string error=ui->LCD->text().toStdString();
-
-    if(error == "SINTAX ERROR" || error == "Division by zero is undefined")
-    {
-        ui->LCD->setText("");
-
-    }
-}
 
 void CalculatorInterface::on_Button_Equal_clicked()
 {
     EraseLCDAfterError();
 
-    const char* auxchar=ui->LCD->text().toStdString().c_str();
- //   char solving[CHAR_SIZE];
+    std::string auxchar=ui->LCD->text().toStdString();
 
-//    strcpy(solving, auxchar);
+    //sintax teste;
 
+    bool lala = true;//teste.general_sintax_error(auxchar);
 
-   // ui->LCD->setText(MakeCalculation(solving));
+    if(lala==true){
+        Evaluate eval;
+        Binarytree etree;
+        Nodetype *root=NULL;
+        for(unsigned int i=0;i<auxchar.size();++i)
+        {
+            char aux = auxchar[i];
+            std::stringstream ss;
+            std::string data;
+            ss << aux;
+            ss >> data;
+            root = etree.insert(root, data);
+        }
+        etree.print(root);
+        eval.evaluatetree(root);
+        ui->LCD->setText(root->data.c_str());
 
+    }else{
+        //ui->LCD->setText("com error");
+    }
 }
 
 
+void CalculatorInterface::EraseLCDAfterError()
+{
+    std::string error=ui->LCD->text().toStdString();
 
+    if(error == "sem error" || error == "com error")
+    {
+        ui->LCD->setText("");
+    }
+}
