@@ -31,7 +31,7 @@ Nodetype *build_node(std::string x) //build a new node for the tree
 
 struct Nodetype* Binarytree::insert(Nodetype *node, std::string data)
 {
-
+isinright=false;
     //bool checkInsert = false; //PEDRO TIROU POIS NÃO TEM PQ ESTA AQUI.
     if(node==NULL) {
         // checkInsert = true; //PEDRO TIROU POIS NÃO TEM PQ ESTA AQUI.
@@ -44,15 +44,13 @@ struct Nodetype* Binarytree::insert(Nodetype *node, std::string data)
             node->right_child=insert(node->right_child,data);
             //std::cout<<"2"<<node->right_child->data<<std::endl;
 
-
             if(isinright==false){
                 node->left_child=insert(node->left_child,data);
-
                 // std::cout<<"3"<<node->left_child->data<<std::endl;
+
             }
         }
     }
-    isinright=false;
     return node;
 }
 

@@ -46,7 +46,7 @@
        <enum>Qt::RightToLeft</enum>
       </property>
       <property name="maxLength">
-       <number>100</number>
+       <number>30</number>
       </property>
       <property name="cursorPosition">
        <number>0</number>

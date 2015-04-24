@@ -18,13 +18,15 @@ SOURCES += \
     binary_tree.cpp \
     evaluate.cpp \
     sintax.cpp \
-    isop.cpp
+    isop.cpp \
+    semantic.cpp
 
 HEADERS  += \
     interface.h \
     binary_tree.h \
     evaluate.h \
     sintax.h \
-    isop.h
+    isop.h \
+    semantic.h
 
 FORMS    += calculatorbir.ui

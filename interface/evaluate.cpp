@@ -40,6 +40,9 @@ void Evaluate::evaluatetree(Nodetype* prt)
         }
         else if(prt->data == "/")
         {
+            if(num2==0){                                //PEDRO COLOCOU.
+                divisionforzero = true;
+            }
             num = num1 / num2;
         }
         else if (prt->data == "*")
@@ -55,6 +58,10 @@ void Evaluate::evaluatetree(Nodetype* prt)
         prt->left_child = NULL;
         prt->right_child = NULL;
 
+if(divisionforzero){                             //PEDRO COLOCOU.
+    prt->data ="Error: Division By Zero";
+    return;
+}
         // cout<<"Resultado = "<< result <<endl;
 
     }

@@ -8,6 +8,7 @@
 #include "binary_tree.h"
 #include "evaluate.h"
 #include <sstream>
+#include "semantic.h"
 
 //#include "binary_tree.cpp"
 //#include "evaluate.cpp"
@@ -207,30 +208,32 @@ void CalculatorInterface::on_Button_Equal_clicked()
     EraseLCDAfterError();
 
     std::string auxchar=ui->LCD->text().toStdString();
-
-    //sintax teste;
-
-    bool lala = true;//teste.general_sintax_error(auxchar);
-
-    if(lala==true){
+    if(auxchar!=""){
+        Sintax sinta;
+        Semantic semanti;
         Evaluate eval;
         Binarytree etree;
         Nodetype *root=NULL;
-        for(unsigned int i=0;i<auxchar.size();++i)
-        {
-            char aux = auxchar[i];
-            std::stringstream ss;
-            std::string data;
-            ss << aux;
-            ss >> data;
-            root = etree.insert(root, data);
-        }
-        etree.print(root);
-        eval.evaluatetree(root);
-        ui->LCD->setText(root->data.c_str());
 
-    }else{
-        //ui->LCD->setText("com error");
+        bool isnoterror=sinta.general_sintax_error(auxchar);
+        if(isnoterror){
+            std::deque<std::string> vetor = semanti.conversion(auxchar);
+
+            for(int i=vetor.size()-1;i>=0;--i){
+                root=etree.insert(root,vetor[i]);
+            }
+            eval.evaluatetree(root);
+
+            for(unsigned int l=0;l<root->data.size();++l){
+                if(root->data[l]=='.'){
+                    root->data[l]=',';
+                }
+
+            }
+            ui->LCD->setText(root->data.c_str());
+        }else{
+            ui->LCD->setText("error");
+        }
     }
 }
 
@@ -239,7 +242,7 @@ void CalculatorInterface::EraseLCDAfterError()
 {
     std::string error=ui->LCD->text().toStdString();
 
-    if(error == "sem error" || error == "com error")
+    if(error == "Error: Division By Zero" || error == "error")
     {
         ui->LCD->setText("");
     }
